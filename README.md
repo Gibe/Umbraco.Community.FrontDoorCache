@@ -39,7 +39,7 @@ You'll need to configure these settings based on the values in Azure:
 | TenantId          | The value in Directory (tenant) ID on the app registration Overview   |
 | ClientId          | The value in Application (Client) ID on the app registration Overview |
 | ClientSecret      | The client secret created for the app registration                    |
-| Domains           | The client secret created for the app registration                    |
+| Domains           | The domains configured in Front Door that you want to purge           |
 
 You can also customise the configuration by setting these settings:
 
