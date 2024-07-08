@@ -15,7 +15,7 @@
 		<Description>Umbraco module to purge items from Azure Front Door Cache when content is publishead</Description>
 		<Title>Umbraco Front Door Cache</Title>
 		<PackageProjectUrl>https://github.com/Gibe/Umbraco.Community.FrontDoorCache</PackageProjectUrl>
-		<PackageIcon>AzureFrontDoorCache.jpg</PackageIcon>
+		<PackageIcon>FrontDoorCache.png</PackageIcon>
 		<PackageTags>umbraco umbraco-marketplace</PackageTags>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<IncludeSymbols>true</IncludeSymbols>
