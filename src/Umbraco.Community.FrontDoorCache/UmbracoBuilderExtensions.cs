@@ -3,10 +3,11 @@ using Umbraco.Cms.Core.DependencyInjection;
 using Umbraco.Cms.Core.Notifications;
 using Umbraco.Community.FrontDoorCache.Api;
 using Umbraco.Community.FrontDoorCache.HealthChecks;
+using Umbraco.Community.FrontDoorCache.Settings;
 
 namespace Umbraco.Community.FrontDoorCache
 {
-	public static class UmbracoBuilderExtensions
+    public static class UmbracoBuilderExtensions
 	{
 		public static void AddFrontDoorCache(this IUmbracoBuilder builder)
 		{

@@ -5,10 +5,11 @@ using Azure.ResourceManager.Cdn;
 using Azure.ResourceManager.Cdn.Models;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Umbraco.Community.FrontDoorCache.Settings;
 
 namespace Umbraco.Community.FrontDoorCache.Api
 {
-	public class FrontDoorApiClient : IFrontDoorApiClient
+    public class FrontDoorApiClient : IFrontDoorApiClient
 	{
 		private ILogger<FrontDoorApiClient> _logger;
 		private FrontDoorCacheOptions _options;

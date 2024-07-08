@@ -1,10 +1,11 @@
 using Microsoft.Extensions.Options;
 using Umbraco.Cms.Core.HealthChecks;
 using Umbraco.Community.FrontDoorCache.Api;
+using Umbraco.Community.FrontDoorCache.Settings;
 
 namespace Umbraco.Community.FrontDoorCache.HealthChecks
 {
-	[HealthCheck(HealthCheckId, HealthCheckName, Description = "Checks the Azure Front Door API to ensure it is available.", Group = "CDN")]
+    [HealthCheck(HealthCheckId, HealthCheckName, Description = "Checks the Azure Front Door API to ensure it is available.", Group = "CDN")]
 	public class FrontDoorCacheHealthCheck : HealthCheck
 	{
 		private const string HealthCheckId = "3f0bbea9-d82e-4805-b9c0-aae4c8bf96eb";
