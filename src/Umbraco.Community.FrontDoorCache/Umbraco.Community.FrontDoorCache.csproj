@@ -4,7 +4,22 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-  </PropertyGroup>
+	  <PackageId>Umbraco.Community.FrontDoorCache</PackageId>
+	  <Version>1.0.0</Version>
+	  <Authors>Steve Temple</Authors>
+	  <Company>Gibe Digital</Company>
+	  <Product>Azure Front Door Cache purging for Umbraco</Product>
+	  <ProjectUrl>https://github.com/Gibe/Umbraco.Community.FrontDoorCache</ProjectUrl>
+	  <PackageTags>umbraco-marketplace;front-door;azure;cdn</PackageTags>
+	  <Copyright>Copyright (c) 2024 Gibe Digital Ltd</Copyright>
+	  <Description>Umbraco module to purge items from Azure Front Door Cache when content is publishead</Description>
+	  <Title>Umbraco Front Door Cache</Title>
+	  <PackageProjectUrl>https://github.com/Gibe/Umbraco.Community.FrontDoorCache</PackageProjectUrl>
+	  <PackageIcon>AzureFrontDoorCache.jpg</PackageIcon>
+	  <PackageReadmeFile>README.md</PackageReadmeFile>
+	  <RepositoryUrl>https://github.com/Gibe/Umbraco.Community.FrontDoorCache</RepositoryUrl>
+	  <RepositoryType>git</RepositoryType>
+	</PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Azure.Identity" Version="1.12.0" />

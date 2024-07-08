@@ -32,7 +32,7 @@ You'll need to configure these settings based on the values in Azure:
 
 | Setting           | Description                                                           |
 | ----------------- | --------------------------------------------------------------------- |
-| Enabled           | Set to true to enable the module, or falst to disable                 |
+| Enabled           | Set to true to enable the module, or false to disable                 |
 | Mode              | Can be one of: All, Self or SelfAndAncestors (See below)              |
 | SubscriptionId    | The ID of the Azure subscription that the Front Door belongs to       |
 | ResourceGroupName | The name for the Azure resource group that the Front Door belongs to  |
