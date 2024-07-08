@@ -29,8 +29,17 @@ namespace Umbraco.Community.FrontDoorCache.Api
 				_options.ResourceGroupName, _options.FrontDoorName, _options.EndpointName);
 			var endpoint = client.GetFrontDoorEndpointResource(frontDoorResourceIdentifier);
 
-			var fd = await endpoint.GetAsync();
-			return fd.HasValue;
+			try
+			{
+				var fd = await endpoint.GetAsync();
+				return fd.HasValue;
+			}
+			catch (Exception ex)
+			{
+				_logger.LogError(ex, "Failure while checking Front Door API is available");
+			}
+
+			return false;
 		}
 
 		public async Task<bool> SendPurgeRequest(FrontDoorPurgeContent content)
@@ -46,8 +55,16 @@ namespace Umbraco.Community.FrontDoorCache.Api
 			{
 				content.Domains.Add(domain);
 			}
-			
-			await endpoint.PurgeContentAsync(WaitUntil.Started, content);
+
+			try
+			{
+				await endpoint.PurgeContentAsync(WaitUntil.Started, content);
+			}
+			catch (Exception ex)
+			{
+				_logger.LogError(ex, "Failure while communicating with Front Door API");
+			}
+
 			return true;
 		}
 
