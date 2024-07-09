@@ -45,11 +45,11 @@ You'll need to configure these settings based on the values in Azure:
 
 # Modes
 
-| Name             | Description                                                                                                |
-| ---------------- | ---------------------------------------------------------------------------------------------------------- |
-| All              | Will completely purge the cache when either media or content is published                                  |
-| Self             | Will purge just the media or content that is published                                                     |
-| SelfAndAncestors | Will purge the published media and for content will purge all of its ancestors working up the content tree | 
+| Name             | Description                                                                                                                         |
+| ---------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| All              | Will completely purge the cache when either media or content is published                                                           |
+| Self             | Purges just the media or content that is published                                                                                  |
+| SelfAndAncestors | Purges the published media and content. Additionally, for content only, will purge all of its ancestors working up the content tree | 
 
 # License
 
@@ -59,5 +59,5 @@ All source code is licensed under the MIT License
 
 # Acknowledgements
 
-This package takes heavy inspiration from [CloudfrareMediaCache](https://github.com/jcdcdev/jcdcdev.Umbraco.CloudflareMediaCache) thanks @jcdcdev
+This package takes heavy inspiration from [CloudflareMediaCache](https://github.com/jcdcdev/jcdcdev.Umbraco.CloudflareMediaCache) thanks @jcdcdev
 

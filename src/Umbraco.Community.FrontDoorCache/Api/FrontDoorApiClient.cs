@@ -11,8 +11,8 @@ namespace Umbraco.Community.FrontDoorCache.Api
 {
     public class FrontDoorApiClient : IFrontDoorApiClient
     {
-        private ILogger<FrontDoorApiClient> _logger;
-        private FrontDoorCacheOptions _options;
+        private readonly ILogger<FrontDoorApiClient> _logger;
+        private readonly FrontDoorCacheOptions _options;
 
         public FrontDoorApiClient(IOptions<FrontDoorCacheOptions> options, ILogger<FrontDoorApiClient> logger)
         {
