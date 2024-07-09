@@ -1,6 +1,9 @@
 # Umbraco.Community.FrontDoorCache
 
-A package for sites which are sitting behind Azure Front Door as a CDN
+A package for sites which are sitting behind Azure Front Door using it as a CDN and a cache for both media and content. 
+Typically they'll be a delay between publishing content and the cache updating at Front Door, this will mean your sites will be serving older versions of the content
+for a time following an update. This package will trigger a purge of the modified content forcing Front Door to update its cache and serve the latest version of the content.
+This will allow you to specify longer cache times in Front Door and reduce the load on your site.
 
 First you, or an Microsoft Entra ID administration will need to create an App Registration in the Azure Portal which will be used to give the site permissions to the Front Door API. Follow [these instructions to setup the new App Registration](EntraIdSetup.md)
 
