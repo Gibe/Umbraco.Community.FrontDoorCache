@@ -8,19 +8,19 @@ using Umbraco.Community.FrontDoorCache.Settings;
 namespace Umbraco.Community.FrontDoorCache
 {
     public static class UmbracoBuilderExtensions
-	{
-		public static void AddFrontDoorCache(this IUmbracoBuilder builder)
-		{
-			builder.HealthChecks().Add<FrontDoorCacheHealthCheck>();
+    {
+        public static void AddFrontDoorCache(this IUmbracoBuilder builder)
+        {
+            builder.HealthChecks().Add<FrontDoorCacheHealthCheck>();
 
-			builder.Services.AddTransient<IFrontDoorApiClient, FrontDoorApiClient>();
+            builder.Services.AddTransient<IFrontDoorApiClient, FrontDoorApiClient>();
 
-			builder.Services
-				.AddOptions<FrontDoorCacheOptions>()
-				.BindConfiguration("FrontDoor:Cache");
+            builder.Services
+              .AddOptions<FrontDoorCacheOptions>()
+              .BindConfiguration("FrontDoor:Cache");
 
-			builder.AddNotificationAsyncHandler<MediaSavedNotification, MediaSavedNotificationHandler>();
-			builder.AddNotificationAsyncHandler<ContentSavedNotification, ContentSavedNotificationHandler>();
-		}
-	}
+            builder.AddNotificationAsyncHandler<MediaSavedNotification, MediaSavedNotificationHandler>();
+            builder.AddNotificationAsyncHandler<ContentSavedNotification, ContentSavedNotificationHandler>();
+        }
+    }
 }
