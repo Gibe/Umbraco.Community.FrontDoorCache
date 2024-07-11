@@ -22,7 +22,7 @@ Go to your Front Door resource in the Azure Portal
 
 Select "Access Control (IAM)", then "Add a role assignment"
 
-Select the role "CDN Endpoint Contributor" then "Next"
+Select the role "CDN Profile Contributor" then "Next"
 
 Click "+ Select members", search for your new App Registration and select it
 
