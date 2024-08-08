@@ -3,11 +3,11 @@ using Umbraco.Cms.Core.DependencyInjection;
 
 namespace Umbraco.Community.FrontDoorCache
 {
-	public class FrontDoorCacheComposer : IComposer
-	{
-		public void Compose(IUmbracoBuilder builder)
-		{
-			builder.AddFrontDoorCache();
-		}
-	}
+    public class FrontDoorCacheComposer : IComposer
+    {
+        public void Compose(IUmbracoBuilder builder)
+        {
+            builder.AddFrontDoorCache();
+        }
+    }
 }

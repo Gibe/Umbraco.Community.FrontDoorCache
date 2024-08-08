@@ -1,6 +1,9 @@
 # Umbraco.Community.FrontDoorCache
 
-A package for sites which are sitting behind Azure Front Door as a CDN
+A package for sites which are sitting behind Azure Front Door using it as a CDN and a cache for both media and content. 
+Typically they'll be a delay between publishing content and the cache updating at Front Door, this will mean your sites will be serving older versions of the content
+for a time following an update. This package will trigger a purge of the modified content forcing Front Door to update its cache and serve the latest version of the content.
+This will allow you to specify longer cache times in Front Door and reduce the load on your site.
 
 First you, or an Microsoft Entra ID administration will need to create an App Registration in the Azure Portal which will be used to give the site permissions to the Front Door API. Follow [these instructions to setup the new App Registration](EntraIdSetup.md)
 
@@ -45,8 +48,19 @@ You'll need to configure these settings based on the values in Azure:
 
 # Modes
 
-| Name             | Description                                                                                                |
-| ---------------- | ---------------------------------------------------------------------------------------------------------- |
-| All              | Will completely purge the cache when either media or content is published                                  |
-| Self             | Will purge just the media or content that is published                                                     |
-| SelfAndAncestors | Will purge the published media and for content will purge all of its ancestors working up the content tree | 
+| Name             | Description                                                                                                                         |
+| ---------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| All              | Will completely purge the cache when either media or content is published                                                           |
+| Self             | Purges just the media or content that is published                                                                                  |
+| SelfAndAncestors | Purges the published media and content. Additionally, for content only, will purge all of its ancestors working up the content tree | 
+
+# License
+
+Copyright © 2024 Gibe Digital Ltd.
+
+All source code is licensed under the MIT License
+
+# Acknowledgements
+
+This package takes heavy inspiration from [CloudflareMediaCache](https://github.com/jcdcdev/jcdcdev.Umbraco.CloudflareMediaCache) thanks @jcdcdev
+

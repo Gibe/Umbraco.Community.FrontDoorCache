@@ -40,7 +40,7 @@ namespace Umbraco.Community.FrontDoorCache
         {
             if (!_options.Enabled)
             {
-                _logger.LogInformation("FrontDoor cache purging is disabled");
+                _logger.LogInformation("Front Door cache purging is disabled");
                 return;
             }
 
@@ -111,21 +111,21 @@ namespace Umbraco.Community.FrontDoorCache
 
             var request = GetContentPathsToPurge(publishedContent);
             var paths = string.Join(", ", request.ContentPaths);
-            _logger.LogInformation("Purging FrontDoor cache {Mode}, clearing paths {paths}", _options.Mode, paths);
+            _logger.LogInformation("Purging Front Door cache {Mode}, clearing paths {paths}", _options.Mode, paths);
             await _frontDoorApiClient.SendPurgeRequest(request);
         }
 
         private async Task PurgeAll()
         {
-            _logger.LogInformation("Purging all FrontDoor cache");
+            _logger.LogInformation("Purging all Front Door cache");
             var result = await _frontDoorApiClient.SendPurgeAllRequest();
             if (!result)
             {
-                _logger.LogError("Failed to purge FrontDoor cache");
+                _logger.LogError("Failed to purge Front Door cache");
             }
             else
             {
-                _logger.LogInformation("Successfully purged FrontDoor cache");
+                _logger.LogInformation("Successfully purged Front Door cache");
             }
         }
 
