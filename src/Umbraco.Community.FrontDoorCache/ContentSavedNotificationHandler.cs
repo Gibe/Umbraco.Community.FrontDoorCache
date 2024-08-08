@@ -120,7 +120,7 @@ namespace Umbraco.Community.FrontDoorCache
             _logger.LogInformation("Purging all Front Door cache");
             if (await _frontDoorApiClient.SendPurgeAllRequest())
             {
-                _logger.LogError("Failed to purge Front Door cache");
+                _logger.LogInformation("Successfully purged Front Door cache");
             }
             else
             {
