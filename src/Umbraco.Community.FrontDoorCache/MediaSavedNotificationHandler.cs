@@ -128,11 +128,7 @@ namespace Umbraco.Community.FrontDoorCache
                     contentPaths.Add(uri.Path + "/*");
                 }
             }
-
             return new FrontDoorPurgeContent(contentPaths);
         }
-
     }
-
-
 }
