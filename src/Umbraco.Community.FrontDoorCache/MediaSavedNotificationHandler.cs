@@ -92,7 +92,7 @@ namespace Umbraco.Community.FrontDoorCache
             }
 
             var request = GetContentPathsToPurge(publishedMedia);
-            var paths = String.Join(", ", request.ContentPaths);
+            var paths = string.Join(", ", request.ContentPaths);
             _logger.LogInformation("Purging Front Door cache {Mode}, clearing paths {paths}", _options.Mode, paths);
             await _frontDoorApiClient.SendPurgeRequest(request);
         }
@@ -100,14 +100,13 @@ namespace Umbraco.Community.FrontDoorCache
         private async Task PurgeAll()
         {
             _logger.LogInformation("Purging all Front Door cache");
-            var result = await _frontDoorApiClient.SendPurgeAllRequest();
-            if (!result)
+            if (await _frontDoorApiClient.SendPurgeAllRequest())
             {
-                _logger.LogError("Failed to purge Front Door cache");
+                _logger.LogInformation("Successfully purged Front Door cache");
             }
             else
             {
-                _logger.LogInformation("Successfully purged Front Door cache");
+                _logger.LogError("Failed to purge Front Door cache");
             }
         }
 

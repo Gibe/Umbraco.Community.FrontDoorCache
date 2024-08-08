@@ -62,7 +62,7 @@ namespace Umbraco.Community.FrontDoorCache
                     return;
                 }
                 case PurgeCacheMode.Unknown:
-                    _logger.LogError("FrontDoor cache mode is unknown");
+                    _logger.LogError("Front Door cache mode is unknown");
                     return;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -118,14 +118,13 @@ namespace Umbraco.Community.FrontDoorCache
         private async Task PurgeAll()
         {
             _logger.LogInformation("Purging all Front Door cache");
-            var result = await _frontDoorApiClient.SendPurgeAllRequest();
-            if (!result)
+            if (await _frontDoorApiClient.SendPurgeAllRequest())
             {
                 _logger.LogError("Failed to purge Front Door cache");
             }
             else
             {
-                _logger.LogInformation("Successfully purged Front Door cache");
+                _logger.LogError("Failed to purge Front Door cache");
             }
         }
 
