@@ -88,6 +88,11 @@ namespace Umbraco.Community.FrontDoorCache
                     _logger.LogWarning("Failed to get published content with id {Id}", saved.Id);
                     continue;
                 }
+
+                if (content.IsDraft())
+                {
+                    continue;
+                }
                 publishedContent.Add(content);
                 if (includeAncestors)
                 {

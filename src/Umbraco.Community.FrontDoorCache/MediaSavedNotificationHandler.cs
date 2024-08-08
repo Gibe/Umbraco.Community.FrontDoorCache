@@ -84,7 +84,10 @@ namespace Umbraco.Community.FrontDoorCache
                     _logger.LogWarning("Failed to get published media with id {Id}", saved.Id);
                     continue;
                 }
-
+                if (media.IsDraft())
+                {
+                    continue;
+                }
                 publishedMedia.Add(media);
             }
 
@@ -115,15 +118,17 @@ namespace Umbraco.Community.FrontDoorCache
             {
                 foreach (var mediaCulture in media.Cultures)
                 {
+                    if (!media.HasProperty("umbracoFile"))
+                    {
+                        continue;
+                    }
                     var url = media.MediaUrl(_publishedUrlProvider, mediaCulture.Key, UrlMode.Relative);
                     var uri = new UriBuilder(url);
                     uri.Path = string.Join("/", uri.Path.Split("/").SkipLast());
                     contentPaths.Add(uri.Path + "/*");
                 }
             }
-
             return new FrontDoorPurgeContent(contentPaths);
         }
     }
-
 }
