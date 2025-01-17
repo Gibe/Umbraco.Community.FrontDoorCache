@@ -137,8 +137,12 @@ namespace Umbraco.Community.FrontDoorCache
                 foreach (var culture in content.Cultures)
                 {
                     var url = content.Url(_publishedUrlProvider, CultureOrNull(culture) , UrlMode.Absolute);
-                    var uri = new UriBuilder(url);
-                    contentPaths.Add(uri.Path);
+                    if (!string.IsNullOrEmpty(url))
+                    {
+                        _logger.LogTrace($"Found content to purge with URL: {url}");
+                        var uri = new UriBuilder(url);
+                        contentPaths.Add(uri.Path);
+                    }
                 }
             }
 
@@ -151,7 +155,5 @@ namespace Umbraco.Community.FrontDoorCache
             }
         }
 
-
     }
-
 }
