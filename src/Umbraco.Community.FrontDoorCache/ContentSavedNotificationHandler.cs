@@ -136,7 +136,14 @@ namespace Umbraco.Community.FrontDoorCache
             {
                 foreach (var culture in content.Cultures)
                 {
-                    var url = content.Url(_publishedUrlProvider, CultureOrNull(culture) , UrlMode.Absolute);
+                    var url = content.Url(_publishedUrlProvider, CultureOrNull(culture), UrlMode.Absolute);
+
+                    // content.Url returns '#' for any content without an URL for legacy purposes
+                    if (string.Equals(url, "#"))
+                    {
+                        continue;
+                    }
+
                     if (!string.IsNullOrEmpty(url))
                     {
                         _logger.LogTrace($"Found content to purge with URL: {url}");
