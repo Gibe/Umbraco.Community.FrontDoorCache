@@ -22,7 +22,6 @@
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<RepositoryUrl>https://github.com/Gibe/Umbraco.Community.FrontDoorCache</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
-        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	</PropertyGroup>
 
     <ItemGroup>

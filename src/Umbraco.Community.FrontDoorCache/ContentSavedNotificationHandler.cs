@@ -146,7 +146,6 @@ namespace Umbraco.Community.FrontDoorCache
 
                     if (!string.IsNullOrEmpty(url))
                     {
-                        _logger.LogTrace($"Found content to purge with URL: {url}");
                         var uri = new UriBuilder(url);
                         contentPaths.Add(uri.Path);
                     }
