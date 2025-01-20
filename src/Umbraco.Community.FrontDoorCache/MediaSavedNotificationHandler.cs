@@ -122,13 +122,19 @@ namespace Umbraco.Community.FrontDoorCache
                     {
                         continue;
                     }
-                    var url = media.MediaUrl(_publishedUrlProvider, mediaCulture.Key, UrlMode.Relative);
+                    var url = media.MediaUrl(_publishedUrlProvider, CultureOrNull(mediaCulture), UrlMode.Absolute);
                     var uri = new UriBuilder(url);
                     uri.Path = string.Join("/", uri.Path.Split("/").SkipLast());
                     contentPaths.Add(uri.Path + "/*");
                 }
             }
             return new FrontDoorPurgeContent(contentPaths);
+
+            // If the culture name is empty, null will give us what we want
+            string? CultureOrNull(KeyValuePair<string, PublishedCultureInfo> culture)
+            {
+                return string.IsNullOrEmpty(culture.Key) ? (string?)null : culture.Key;
+            }
         }
     }
 }
