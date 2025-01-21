@@ -136,10 +136,10 @@ namespace Umbraco.Community.FrontDoorCache
             {
                 foreach (var culture in content.Cultures)
                 {
-                    var url = content.Url(_publishedUrlProvider, CultureOrNull(culture), UrlMode.Absolute);
+                    var url = content.Url(_publishedUrlProvider, CultureKeyOrNull(culture), UrlMode.Absolute);
 
                     // content.Url returns '#' for any content without an URL for legacy purposes
-                    if (string.Equals(url, "#"))
+                    if (url.Equals("#"))
                     {
                         continue;
                     }
@@ -155,7 +155,7 @@ namespace Umbraco.Community.FrontDoorCache
             return new FrontDoorPurgeContent(contentPaths);
 
             // If the culture name is empty, null will give us what we want
-            string? CultureOrNull(KeyValuePair<string, PublishedCultureInfo> culture)
+            string? CultureKeyOrNull(KeyValuePair<string, PublishedCultureInfo> culture)
             {
                 return string.IsNullOrEmpty(culture.Key) ? (string?)null : culture.Key;
             }
