@@ -8,6 +8,7 @@ using Umbraco.Cms.Core.Notifications;
 using Umbraco.Cms.Core.Routing;
 using Umbraco.Cms.Core.Web;
 using Umbraco.Community.FrontDoorCache.Api;
+using Umbraco.Community.FrontDoorCache.Culture;
 using Umbraco.Community.FrontDoorCache.Settings;
 using Umbraco.Extensions;
 
@@ -122,19 +123,13 @@ namespace Umbraco.Community.FrontDoorCache
                     {
                         continue;
                     }
-                    var url = media.MediaUrl(_publishedUrlProvider, CultureKeyOrNull(mediaCulture), UrlMode.Absolute);
+                    var url = media.MediaUrl(_publishedUrlProvider, mediaCulture.CultureKeyOrNull(), UrlMode.Absolute);
                     var uri = new UriBuilder(url);
                     uri.Path = string.Join("/", uri.Path.Split("/").SkipLast());
                     contentPaths.Add(uri.Path + "/*");
                 }
             }
             return new FrontDoorPurgeContent(contentPaths);
-
-            // If the culture name is empty, null will give us what we want
-            string? CultureKeyOrNull(KeyValuePair<string, PublishedCultureInfo> culture)
-            {
-                return string.IsNullOrEmpty(culture.Key) ? (string?)null : culture.Key;
-            }
         }
     }
 }
