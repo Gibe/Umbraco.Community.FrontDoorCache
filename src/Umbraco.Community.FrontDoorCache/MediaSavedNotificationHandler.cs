@@ -124,9 +124,14 @@ namespace Umbraco.Community.FrontDoorCache
                         continue;
                     }
                     var url = media.MediaUrl(_publishedUrlProvider, mediaCulture.CultureKeyOrNull(), UrlMode.Absolute);
-                    var uri = new UriBuilder(url);
-                    uri.Path = string.Join("/", uri.Path.Split("/").SkipLast());
-                    contentPaths.Add(uri.Path + "/*");
+
+                    // .MediaUrl returns string.Empty if it cannot be retrieved by provider
+                    if (!string.IsNullOrEmpty(url))
+                    {
+                        var uri = new UriBuilder(url);
+                        uri.Path = string.Join("/", uri.Path.Split("/").SkipLast());
+                        contentPaths.Add(uri.Path + "/*");
+                    }
                 }
             }
             return new FrontDoorPurgeContent(contentPaths);
