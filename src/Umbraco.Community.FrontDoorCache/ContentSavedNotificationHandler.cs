@@ -8,6 +8,7 @@ using Umbraco.Cms.Core.Notifications;
 using Umbraco.Cms.Core.Routing;
 using Umbraco.Cms.Core.Web;
 using Umbraco.Community.FrontDoorCache.Api;
+using Umbraco.Community.FrontDoorCache.Culture;
 using Umbraco.Community.FrontDoorCache.Settings;
 using Umbraco.Extensions;
 
@@ -136,22 +137,25 @@ namespace Umbraco.Community.FrontDoorCache
             {
                 foreach (var culture in content.Cultures)
                 {
-                    var url = content.Url(_publishedUrlProvider, CultureOrNull(culture) , UrlMode.Absolute);
-                    var uri = new UriBuilder(url);
-                    contentPaths.Add(uri.Path);
+                    // If the culture name is empty, null will give us what we want
+                    var url = content.Url(_publishedUrlProvider, culture.CultureKeyOrNull(), UrlMode.Absolute);
+
+                    // content.Url returns '#' for any content without an URL for legacy purposes
+                    if (url.Equals("#"))
+                    {
+                        continue;
+                    }
+
+                    if (!string.IsNullOrEmpty(url))
+                    {
+                        var uri = new UriBuilder(url);
+                        contentPaths.Add(uri.Path);
+                    }
                 }
             }
 
             return new FrontDoorPurgeContent(contentPaths);
-
-            // If the culture name is empty, null will give us what we want
-            string? CultureOrNull(KeyValuePair<string, PublishedCultureInfo> culture)
-            {
-                return string.IsNullOrEmpty(culture.Key) ? (string?)null : culture.Key;
-            }
         }
 
-
     }
-
 }
