@@ -1,5 +1,7 @@
 # Umbraco.Community.FrontDoorCache
 
+> **Deprecated for Umbraco 17.1+ / Automate users**: if your site runs Umbraco Automate, use [`Umbraco.Community.FrontDoorCache.Automate`](https://github.com/Gibe/Umbraco.Community.FrontDoorCache) instead - it exposes "Purge Front Door Path(s)" and "Purge Front Door (All)" actions you can wire into any automation/trigger, replacing this package's automatic purge-on-publish behavior with an explicit, composable workflow. This package (`Umbraco.Community.FrontDoorCache`) remains supported for pre-Automate / non-Automate sites.
+
 A package for sites which are sitting behind Azure Front Door using it as a CDN and a cache for both media and content. 
 Typically they'll be a delay between publishing content and the cache updating at Front Door, this will mean your sites will be serving older versions of the content
 for a time following an update. This package will trigger a purge of the modified content forcing Front Door to update its cache and serve the latest version of the content.

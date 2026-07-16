@@ -1,0 +1,44 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net10.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<PackageId>Umbraco.Community.FrontDoorCache.Automate</PackageId>
+		<Version>1.0.0</Version>
+		<Authors>Steve Temple</Authors>
+		<Company>Gibe Digital</Company>
+		<Product>Azure Front Door Cache purging for Umbraco Automate</Product>
+		<ProjectUrl>https://github.com/Gibe/Umbraco.Community.FrontDoorCache</ProjectUrl>
+		<PackageTags>umbraco-marketplace;umbraco-automate;front-door;azure;cdn</PackageTags>
+		<Copyright>Copyright (c) 2026 Gibe Digital Ltd</Copyright>
+		<Description>Umbraco Automate connection and actions to purge Azure Front Door cache paths on demand from any automation trigger</Description>
+		<Title>Umbraco Front Door Cache - Automate</Title>
+		<PackageProjectUrl>https://github.com/Gibe/Umbraco.Community.FrontDoorCache</PackageProjectUrl>
+		<PackageIcon>FrontDoorCache.png</PackageIcon>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<RepositoryUrl>https://github.com/Gibe/Umbraco.Community.FrontDoorCache</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\..\FrontDoorCache.png">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+		<None Include="README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Azure.Identity" Version="1.21.0" />
+		<PackageReference Include="Azure.ResourceManager.Cdn" Version="1.5.1" />
+		<PackageReference Include="Umbraco.Automate.Core" Version="17.0.0" />
+		<PackageReference Include="Umbraco.Cms.Core" Version="17.4.0" />
+	</ItemGroup>
+
+</Project>
