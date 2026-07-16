@@ -6,12 +6,12 @@ namespace Umbraco.Community.FrontDoorCache.Automate.Actions;
 public sealed class PurgeFrontDoorPathsOutput
 {
     /// <summary>
-    /// Gets the number of paths that were submitted for purging.
+    /// Gets the number of URLs that were resolved for the content item and submitted for purging.
     /// </summary>
     public int PurgedPathCount { get; init; }
 
     /// <summary>
-    /// Gets the paths that were submitted for purging.
+    /// Gets the paths that were resolved for the content item and submitted for purging.
     /// </summary>
     public string[] Paths { get; init; } = [];
 }

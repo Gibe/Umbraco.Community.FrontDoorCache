@@ -8,12 +8,12 @@ namespace Umbraco.Community.FrontDoorCache.Automate.Actions;
 public sealed class PurgeFrontDoorPathsSettings
 {
     /// <summary>
-    /// Gets or sets the paths to purge, one per line (or comma-separated).
+    /// Gets or sets the key of the content item whose URLs should be purged.
     /// </summary>
     [Field(
-        Label = "Paths",
-        Description = "One path per line (or comma-separated), e.g. /blog/my-post or /images/*. Supports runtime bindings such as ${trigger.url}.",
+        Label = "Content Key",
+        Description = "The key of the content item to purge, e.g. ${trigger.content.key}. Every URL for the item (across all cultures) is resolved and purged.",
         SupportsBindings = true,
         SortOrder = 10)]
-    public string Paths { get; set; } = string.Empty;
+    public string ContentKey { get; set; } = string.Empty;
 }
