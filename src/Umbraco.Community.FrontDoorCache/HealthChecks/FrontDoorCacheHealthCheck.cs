@@ -45,13 +45,26 @@ namespace Umbraco.Community.FrontDoorCache.HealthChecks
                 });
             }
 
-            if (String.IsNullOrEmpty(_options.ClientId) ||
-                String.IsNullOrEmpty(_options.ClientSecret) ||
-                String.IsNullOrEmpty(_options.TenantId))
+            var credentialsMissing = _options.AuthenticationType switch
             {
+                AuthenticationType.ManagedIdentity => false,
+                AuthenticationType.Certificate => String.IsNullOrEmpty(_options.ClientId) ||
+                    String.IsNullOrEmpty(_options.TenantId) ||
+                    (String.IsNullOrEmpty(_options.CertificatePath) && String.IsNullOrEmpty(_options.CertificateThumbprint)),
+                _ => String.IsNullOrEmpty(_options.ClientId) ||
+                    String.IsNullOrEmpty(_options.ClientSecret) ||
+                    String.IsNullOrEmpty(_options.TenantId)
+            };
+
+            if (credentialsMissing)
+            {
+                var description = _options.AuthenticationType == AuthenticationType.Certificate
+                    ? "Set Front Door Client ID, Tenant ID and either CertificatePath or CertificateThumbprint in settings."
+                    : "Set Front Door Client ID, Client Secret and Tenant ID in settings.";
+
                 statuses.Add(new HealthCheckStatus("Microsoft Entra Id app registration configuration missing.")
                 {
-                    Description = "Set Front Door Client ID, Client Secret and Tenant ID in settings.",
+                    Description = description,
                     ResultType = StatusResultType.Error
                 });
             }
