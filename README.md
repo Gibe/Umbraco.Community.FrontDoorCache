@@ -45,6 +45,35 @@ You'll need to configure these settings based on the values in Azure:
 | ClientId          | The value in Application (Client) ID on the app registration Overview |
 | ClientSecret      | The client secret created for the app registration                    |
 | Domains           | The domains configured in Front Door that you want to purge           |
+| AuthenticationType | ClientSecret (default), ManagedIdentity or Certificate (See below)   |
+
+# Authentication
+
+| AuthenticationType | Required settings                                                                  |
+| ------------------ | ---------------------------------------------------------------------------------- |
+| ClientSecret       | TenantId, ClientId, ClientSecret                                                   |
+| ManagedIdentity    | None for a system-assigned identity. Set ClientId to use a user-assigned identity  |
+| Certificate        | TenantId, ClientId and either CertificatePath or CertificateThumbprint             |
+
+For ManagedIdentity, grant the managed identity of your App Service the "CDN Profile Contributor" role on the Front Door instead of creating an App Registration.
+
+For Certificate, upload the public key of the certificate to the App Registration under "Certificates & secrets". Additional settings:
+
+| Setting                  | Description                                                                   |
+| ------------------------ | ----------------------------------------------------------------------------- |
+| CertificatePath          | Path to a .pfx file                                                           |
+| CertificatePassword      | Password for the .pfx file, if it has one                                     |
+| CertificateThumbprint    | Thumbprint of a certificate in the store, used when CertificatePath is not set |
+| CertificateStoreLocation | CurrentUser (default) or LocalMachine                                         |
+| CertificateStoreName     | Certificate store name, defaults to My                                        |
+
+```
+"FrontDoor": {
+	"Cache": {
+		"AuthenticationType": "ManagedIdentity"
+	}
+}
+```
 
 # Modes
 

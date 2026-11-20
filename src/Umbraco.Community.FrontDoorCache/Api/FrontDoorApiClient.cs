@@ -1,5 +1,4 @@
 using Azure;
-using Azure.Identity;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Cdn;
 using Azure.ResourceManager.Cdn.Models;
@@ -22,15 +21,9 @@ namespace Umbraco.Community.FrontDoorCache.Api
 
         public async Task<bool> CheckStatus()
         {
-            var credential = new ClientSecretCredential(_options.TenantId, _options.ClientId, _options.ClientSecret);
-            var client = new ArmClient(credential);
-
-            var frontDoorResourceIdentifier = FrontDoorEndpointResource.CreateResourceIdentifier(_options.SubscriptionId,
-              _options.ResourceGroupName, _options.FrontDoorName, _options.EndpointName);
-            var endpoint = client.GetFrontDoorEndpointResource(frontDoorResourceIdentifier);
-
             try
             {
+                var endpoint = GetEndpoint();
                 var fd = await endpoint.GetAsync();
                 return fd.HasValue;
             }
@@ -44,13 +37,6 @@ namespace Umbraco.Community.FrontDoorCache.Api
 
         public async Task<bool> SendPurgeRequest(FrontDoorPurgeContent content)
         {
-            var credential = new ClientSecretCredential(_options.TenantId, _options.ClientId, _options.ClientSecret);
-            var client = new ArmClient(credential);
-
-            var frontDoorResourceIdentifier = FrontDoorEndpointResource.CreateResourceIdentifier(_options.SubscriptionId,
-              _options.ResourceGroupName, _options.FrontDoorName, _options.EndpointName);
-            var endpoint = client.GetFrontDoorEndpointResource(frontDoorResourceIdentifier);
-
             foreach (var domain in _options.Domains)
             {
                 content.Domains.Add(domain);
@@ -58,14 +44,24 @@ namespace Umbraco.Community.FrontDoorCache.Api
 
             try
             {
+                var endpoint = GetEndpoint();
                 await endpoint.PurgeContentAsync(WaitUntil.Started, content);
+                return true;
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Failure while communicating with Front Door API");
+                return false;
             }
+        }
 
-            return true;
+        private FrontDoorEndpointResource GetEndpoint()
+        {
+            var client = new ArmClient(FrontDoorCredentialFactory.Create(_options));
+
+            var frontDoorResourceIdentifier = FrontDoorEndpointResource.CreateResourceIdentifier(_options.SubscriptionId,
+              _options.ResourceGroupName, _options.FrontDoorName, _options.EndpointName);
+            return client.GetFrontDoorEndpointResource(frontDoorResourceIdentifier);
         }
 
         public async Task<bool> SendPurgeAllRequest()
