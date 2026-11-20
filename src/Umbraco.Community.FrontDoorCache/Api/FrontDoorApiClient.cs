@@ -1,5 +1,4 @@
 using Azure;
-using Azure.Identity;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Cdn;
 using Azure.ResourceManager.Cdn.Models;
@@ -47,13 +46,13 @@ namespace Umbraco.Community.FrontDoorCache.Api
             {
                 var endpoint = GetEndpoint();
                 await endpoint.PurgeContentAsync(WaitUntil.Started, content);
+                return true;
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Failure while communicating with Front Door API");
+                return false;
             }
-
-            return true;
         }
 
         private FrontDoorEndpointResource GetEndpoint()
